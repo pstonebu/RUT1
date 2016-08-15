@@ -3,31 +3,27 @@ import com.sun.tools.javac.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Episode {
+class Episode {
 
     private int numBeams;
     private List<Pair> pairs = new ArrayList<Pair>();
 
-    public Episode() {
+    Episode() {
     }
 
-    public int getNumBeams() {
+    int getNumBeams() {
         return numBeams;
     }
 
-    public void setNumBeams(int numBeams) {
+    void setNumBeams(int numBeams) {
         this.numBeams = numBeams;
     }
 
-    public List<Pair> getPairs() {
+    List<Pair> getPairs() {
         return pairs;
     }
 
-    public void setPairs(List<Pair> pairs) {
-        this.pairs = pairs;
-    }
-
-    public void addPair(Main.GUY guy, Main.GIRL girl) {
-        pairs.add(new Pair(guy, girl));
+    void addPair(Main.GUY guy, Main.GIRL girl) {
+        pairs.add(new Pair<Main.GUY, Main.GIRL>(guy, girl));
     }
 }

@@ -3,6 +3,7 @@ import com.sun.tools.javac.util.Pair;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
 public class Main {
 
@@ -99,15 +100,15 @@ public class Main {
         episodeSeven.setNumBeams(4);
 
         List<Pair> confirmed = new ArrayList<Pair>();
-        confirmed.add(new Pair(GUY.CAMERON, GIRL.MIKALA));
-        confirmed.add(new Pair(GUY.SAM, GIRL.ALYSSA));
+        confirmed.add(new Pair<GUY,GIRL>(GUY.CAMERON, GIRL.MIKALA));
+        confirmed.add(new Pair<GUY,GIRL>(GUY.SAM, GIRL.ALYSSA));
 
         List<Pair> disconfirmed = new ArrayList<Pair>();
-        disconfirmed.add(new Pair(GUY.PROSPER, GIRL.TORI));
-        disconfirmed.add(new Pair(GUY.JOHN, GIRL.JULIA));
-        disconfirmed.add(new Pair(GUY.ASAF, GIRL.TORI));
-        disconfirmed.add(new Pair(GUY.GIOVANNI, GIRL.KAYLEN));
-        disconfirmed.add(new Pair(GUY.CAM, GIRL.VICTORIA));
+        disconfirmed.add(new Pair<GUY,GIRL>(GUY.PROSPER, GIRL.TORI));
+        disconfirmed.add(new Pair<GUY,GIRL>(GUY.JOHN, GIRL.JULIA));
+        disconfirmed.add(new Pair<GUY,GIRL>(GUY.ASAF, GIRL.TORI));
+        disconfirmed.add(new Pair<GUY,GIRL>(GUY.GIOVANNI, GIRL.KAYLEN));
+        disconfirmed.add(new Pair<GUY,GIRL>(GUY.CAM, GIRL.VICTORIA));
 
         List<Episode> episodes = new ArrayList<Episode>();
         episodes.add(episodeOne);
@@ -133,67 +134,72 @@ public class Main {
 
     }
 
-    public static List<List<Pair>> findWinningPairs(List<Episode> episodes, List<Pair> confirmed, List<Pair> disconfirmed) {
+    private static List<List<Pair>> findWinningPairs(List<Episode> episodes, List<Pair> confirmed, List<Pair> disconfirmed) {
         List<List<Pair>> winningPairs = new ArrayList<List<Pair>>();
+        TreeMap<Integer,GIRL> treemap = new TreeMap<Integer,GIRL>();
+        int girlsLength = GIRL.values().length;
+        for (int i = 0; i < girlsLength; i++) {
+            treemap.put(i, GIRL.values()[i]);
+        }
 
-        for (int a = 0; a < 10; a++) {
-            for (int b = 0; b < 10; b++) {
-                if (matchesAny(b, a)) {
-                    continue;
-                }
-                for (int c = 0; c < 10; c++) {
-                    if (matchesAny(c, a, b)) {
-                        continue;
-                    }
-                    for (int d = 0; d < 10; d++) {
-                        if (matchesAny(d, a, b, c)) {
-                            continue;
-                        }
-                        for (int e = 0; e < 10; e++) {
-                            if (matchesAny(e, a, b, c, d)) {
-                                continue;
-                            }
-                            for (int f = 0; f < 10; f++) {
-                                if (matchesAny(f, a, b, c, d, e)) {
-                                    continue;
-                                }
-                                for (int g = 0; g < 10; g++) {
-                                    if (matchesAny(g, a, b, c, d, e, f)) {
-                                        continue;
-                                    }
-                                    for (int h = 0; h < 10; h++) {
-                                        if (matchesAny(h, a, b, c, d, e, f, g)) {
-                                            continue;
-                                        }
-                                        for (int i = 0; i < 10; i++) {
-                                            if (matchesAny(i, a, b, c, d, e, f, g, h)) {
-                                                continue;
-                                            }
-                                            for (int j = 0; j < 10; j++) {
-                                                if (matchesAny(j, a, b, c, d, e, f, g, h, i)) {
-                                                    continue;
-                                                }
+        for (int a = 0; a < girlsLength; a++) {
+            int firstInt = (Integer)treemap.keySet().toArray()[a];
+            GIRL first = treemap.remove(firstInt);
+
+            for (int b = 0; b < girlsLength-1; b++) {
+                int secondInt = (Integer)treemap.keySet().toArray()[b];
+                GIRL second = treemap.remove(secondInt);
+
+                for (int c = 0; c < girlsLength-2; c++) {
+                    int thirdInt = (Integer)treemap.keySet().toArray()[c];
+                    GIRL third = treemap.remove(thirdInt);
+
+                    for (int d = 0; d < girlsLength-3; d++) {
+                        int fourthInt = (Integer)treemap.keySet().toArray()[d];
+                        GIRL fourth = treemap.remove(fourthInt);
+
+                        for (int e = 0; e < girlsLength-4; e++) {
+                            int fifthInt = (Integer)treemap.keySet().toArray()[e];
+                            GIRL fifth = treemap.remove(fifthInt);
+
+                            for (int f = 0; f < girlsLength-5; f++) {
+                                int sixthInt = (Integer)treemap.keySet().toArray()[f];
+                                GIRL sixth = treemap.remove(sixthInt);
+
+                                for (int g = 0; g < girlsLength-6; g++) {
+                                    int seventhInt = (Integer)treemap.keySet().toArray()[g];
+                                    GIRL seventh = treemap.remove(seventhInt);
+
+                                    for (int h = 0; h < girlsLength-7; h++) {
+                                        int eighthInt = (Integer)treemap.keySet().toArray()[h];
+                                        GIRL eighth = treemap.remove(eighthInt);
+
+                                        for (int i = 0; i < girlsLength-8; i++) {
+                                            int ninthInt = (Integer)treemap.keySet().toArray()[i];
+                                            GIRL ninth = treemap.remove(ninthInt);
+
+                                            for (int j = 0; j < girlsLength-9; j++) {
+                                                int tenthInt = (Integer)treemap.keySet().toArray()[j];
+                                                GIRL tenth = treemap.remove(tenthInt);
+
                                                 List<Pair> current = new ArrayList<Pair>();
-                                                current.add(new Pair(GUY.ASAF, GIRL.values()[a]));
-                                                current.add(new Pair(GUY.CAM, GIRL.values()[b]));
-                                                current.add(new Pair(GUY.CAMERON, GIRL.values()[c]));
-                                                current.add(new Pair(GUY.GIOVANNI, GIRL.values()[d]));
-                                                current.add(new Pair(GUY.JOHN, GIRL.values()[e]));
-                                                current.add(new Pair(GUY.MORGAN, GIRL.values()[f]));
-                                                current.add(new Pair(GUY.PROSPER, GIRL.values()[g]));
-                                                current.add(new Pair(GUY.SAM, GIRL.values()[h]));
-                                                current.add(new Pair(GUY.STEPHEN, GIRL.values()[i]));
-                                                current.add(new Pair(GUY.TYLER, GIRL.values()[j]));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[0], first));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[1], second));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[2], third));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[3], fourth));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[4], fifth));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[5], sixth));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[6], seventh));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[7], eighth));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[8], ninth));
+                                                current.add(new Pair<GUY,GIRL>(GUY.values()[9], tenth));
 
                                                 if (current.containsAll(confirmed) && Collections.disjoint(disconfirmed, current)) {
                                                     boolean match = true;
                                                     for (Episode episode : episodes) {
                                                         List<Pair> intersect = new ArrayList<Pair>(current);
                                                         intersect.retainAll(episode.getPairs());
-                                                        if (intersect.size() == episode.getNumBeams()) {
-                                                            continue;
-                                                        }
-                                                        else {
+                                                        if (intersect.size() != episode.getNumBeams()) {
                                                             match = false;
                                                             break;
                                                         }
@@ -203,36 +209,36 @@ public class Main {
                                                         winningPairs.add(current);
                                                     }
                                                 }
+                                                treemap.put(tenthInt, tenth);
                                             }
+                                            treemap.put(ninthInt, ninth);
                                         }
+                                        treemap.put(eighthInt, eighth);
                                     }
+                                    treemap.put(seventhInt, seventh);
                                 }
+                                treemap.put(sixthInt, sixth);
                             }
+                            treemap.put(fifthInt, fifth);
                         }
+                        treemap.put(fourthInt, fourth);
                     }
+                    treemap.put(thirdInt, third);
                 }
+                treemap.put(secondInt, second);
             }
+            treemap.put(firstInt, first);
         }
 
 
         return winningPairs;
     }
 
-    public static boolean matchesAny(int one, int ... others) {
-        for (int other : others) {
-            if (one == other) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public enum GUY {
+    enum GUY {
         ASAF, CAM, CAMERON, GIOVANNI, JOHN, MORGAN, PROSPER, SAM, STEPHEN, TYLER
-
     }
 
-    public enum GIRL {
+    enum GIRL {
         ALYSSA, CAMILLE, EMMA, FRANCESCA, JULIA, KAYLEN, MIKALA, NICOLE, TORI, VICTORIA
     }
 }
