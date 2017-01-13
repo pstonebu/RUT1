@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.TreeMap;
 
 public class Main {
+    private static List<Episode> episodes = new ArrayList<Episode>();;
+    private static List<Pair> confirmed = new ArrayList<Pair>();
+    private static List<Pair> disconfirmed = new ArrayList<Pair>();;
+    private static List<List<Pair>> winningPairs = new ArrayList<List<Pair>>();
+    private static TreeMap<Integer,GIRL> treemap = new TreeMap<Integer,GIRL>();
+    private static List<GIRL> girls = new ArrayList<GIRL>();
 
     public static void main(String[] args) {
         Episode episodeOne = new Episode();
@@ -22,16 +28,15 @@ public class Main {
         episodeOne.addPair(GUY.TYLER, GIRL.TAYLOR);
         episodeOne.setNumBeams(2);
 
-
-        List<Pair> confirmed = new ArrayList<Pair>();
-
-        List<Pair> disconfirmed = new ArrayList<Pair>();
         disconfirmed.add(new Pair<GUY,GIRL>(GUY.HAYDEN, GIRL.GIANNA));
 
-        List<Episode> episodes = new ArrayList<Episode>();
         episodes.add(episodeOne);
 
-        List<List<Pair>> winningPairs = findWinningPairs(episodes, confirmed, disconfirmed);
+        for (int i = 0; i < GIRL.values().length; i++) {
+            treemap.put(i, GIRL.values()[i]);
+        }
+
+        recursePairs();
 
         System.out.println("Number of winning combinations: " + winningPairs.size());
         if (winningPairs.size() < 20 && winningPairs.size() > 0) {
@@ -46,20 +51,7 @@ public class Main {
 
     }
 
-    private static List<List<Pair>> findWinningPairs(List<Episode> episodes, List<Pair> confirmed, List<Pair> disconfirmed) {
-        List<List<Pair>> winningPairs = new ArrayList<List<Pair>>();
-        TreeMap<Integer,GIRL> treemap = new TreeMap<Integer,GIRL>();
-        for (int i = 0; i < GIRL.values().length; i++) {
-            treemap.put(i, GIRL.values()[i]);
-        }
-
-        recursePairs(episodes, confirmed, disconfirmed, winningPairs, treemap, new ArrayList<GIRL>());
-
-        return winningPairs;
-    }
-
-    private static void recursePairs(List<Episode> episodes, List<Pair> confirmed, List<Pair> disconfirmed,
-                                     List<List<Pair>> winningPairs, TreeMap<Integer,GIRL> treemap, List<GIRL> girls) {
+    private static void recursePairs() {
         for (int i = 0; i < treemap.size() - confirmed.size(); i++) {
             int index = (Integer)treemap.keySet().toArray()[i];
             GIRL girl = treemap.remove(index);
@@ -96,7 +88,7 @@ public class Main {
                     }
                 }
             } else {
-                recursePairs(episodes, confirmed, disconfirmed, winningPairs, treemap, girls);
+                recursePairs();
             }
             girls.remove(girl);
             treemap.put(index, girl);
