@@ -1,12 +1,10 @@
-import com.sun.tools.javac.util.Pair;
-
 import java.util.*;
 
 public class Main {
     private static List<Episode> episodes = new ArrayList<Episode>();;
-    private static List<Pair> confirmed = new ArrayList<Pair>();
-    private static List<Pair> disconfirmed = new ArrayList<Pair>();;
-    private static List<List<Pair>> winningPairs = new ArrayList<List<Pair>>();
+    private static List<Couple> proven = new ArrayList<Couple>();
+    private static List<Couple> disproven = new ArrayList<Couple>();;
+    private static List<List<Couple>> winningCouples = new ArrayList<List<Couple>>();
     private static TreeMap<Integer,GIRL> treemap = new TreeMap<Integer,GIRL>();
     private static List<GIRL> girls = new ArrayList<GIRL>();
     private static GIRL[] availableGirls = new GIRL[GIRL.values().length];
@@ -14,95 +12,125 @@ public class Main {
 
     public static void main(String[] args) {
         Episode episodeOne = new Episode();
-        episodeOne.addPair(GUY.ANDRE, GIRL.ALICIA);
-        episodeOne.addPair(GUY.DERRICK, GIRL.KATHRYN);
-        episodeOne.addPair(GUY.EDWARD, GIRL.KAM);
-        episodeOne.addPair(GUY.HAYDEN, GIRL.SHANNON);
-        episodeOne.addPair(GUY.JAYLAN, GIRL.CASANDRA);
-        episodeOne.addPair(GUY.JOEY, GIRL.CAROLINA);
-        episodeOne.addPair(GUY.MICHAEL, GIRL.HANNAH);
-        episodeOne.addPair(GUY.MIKE, GIRL.KARI);
-        episodeOne.addPair(GUY.OSVALDO, GIRL.TYRANNY);
-        episodeOne.addPair(GUY.OZZY, GIRL.GIANNA);
-        episodeOne.addPair(GUY.TYLER, GIRL.TAYLOR);
+        episodeOne.addCouple(GUY.ANDRE, GIRL.ALICIA);
+        episodeOne.addCouple(GUY.DERRICK, GIRL.KATHRYN);
+        episodeOne.addCouple(GUY.EDWARD, GIRL.KAM);
+        episodeOne.addCouple(GUY.HAYDEN, GIRL.SHANNON);
+        episodeOne.addCouple(GUY.JAYLAN, GIRL.CASANDRA);
+        episodeOne.addCouple(GUY.JOEY, GIRL.CAROLINA);
+        episodeOne.addCouple(GUY.MICHAEL, GIRL.HANNAH);
+        episodeOne.addCouple(GUY.MIKE, GIRL.KARI);
+        episodeOne.addCouple(GUY.OSVALDO, GIRL.TYRANNY);
+        episodeOne.addCouple(GUY.OZZY, GIRL.GIANNA);
+        episodeOne.addCouple(GUY.TYLER, GIRL.TAYLOR);
         episodeOne.setNumBeams(2);
 
-        disconfirmed.add(new Pair<GUY,GIRL>(GUY.HAYDEN, GIRL.GIANNA));
+        Episode episodeTwo = new Episode();
+        episodeTwo.addCouple(GUY.ANDRE, GIRL.HANNAH);
+        episodeTwo.addCouple(GUY.DERRICK, GIRL.ALICIA);
+        episodeTwo.addCouple(GUY.EDWARD, GIRL.SHANNON);
+        episodeTwo.addCouple(GUY.HAYDEN, GIRL.TAYLOR);
+        episodeTwo.addCouple(GUY.JAYLAN, GIRL.KAM);
+        episodeTwo.addCouple(GUY.JOEY, GIRL.CAROLINA);
+        episodeTwo.addCouple(GUY.MICHAEL, GIRL.GIANNA);
+        episodeTwo.addCouple(GUY.MIKE, GIRL.CASANDRA);
+        episodeTwo.addCouple(GUY.OSVALDO, GIRL.KARI);
+        episodeTwo.addCouple(GUY.OZZY, GIRL.KATHRYN);
+        episodeTwo.addCouple(GUY.TYLER, GIRL.TYRANNY);
+        episodeTwo.setNumBeams(0);
+
+        Episode episodeThree = new Episode();
+        episodeThree.addCouple(GUY.ANDRE, GIRL.KARI);
+        episodeThree.addCouple(GUY.DERRICK, GIRL.HANNAH);
+        episodeThree.addCouple(GUY.EDWARD, GIRL.KAM);
+        episodeThree.addCouple(GUY.HAYDEN, GIRL.CAROLINA);
+        episodeThree.addCouple(GUY.JAYLAN, GIRL.CASANDRA);
+        episodeThree.addCouple(GUY.JOEY, GIRL.KATHRYN);
+        episodeThree.addCouple(GUY.MICHAEL, GIRL.TAYLOR);
+        episodeThree.addCouple(GUY.MIKE, GIRL.ALICIA);
+        episodeThree.addCouple(GUY.OSVALDO, GIRL.TYRANNY);
+        episodeThree.addCouple(GUY.OZZY, GIRL.GIANNA);
+        episodeThree.addCouple(GUY.TYLER, GIRL.SHANNON);
+        episodeThree.setNumBeams(4);
+
+        disproven.add(new Couple(GUY.HAYDEN, GIRL.GIANNA));
+        disproven.add(new Couple(GUY.ANDRE, GIRL.ALICIA));
+        disproven.add(new Couple(GUY.OZZY, GIRL.CAROLINA));
 
         episodes.add(episodeOne);
+        episodes.add(episodeTwo);
+        episodes.add(episodeThree);
 
-        int availableGirlsCounter = 0;
+        int availableGirlsCounter = 0, availableGuysCounter = 0;
         for (int i = 0; i < GIRL.values().length; i++) {
-            boolean available = true;
-            for (Pair<GUY,GIRL> pair : confirmed) {
-                if (pair.snd == GIRL.values()[i]) {
-                    available = false;
+            boolean girlAvailable = true;
+            boolean guyAvailable = true;
+            for (Couple couple : proven) {
+                if (couple.getGirl() == GIRL.values()[i]) {
+                    girlAvailable = false;
+                }
+                if (couple.getGuy() == GUY.values()[i]) {
+                    guyAvailable = false;
                 }
             }
-            if (available) {
+            if (girlAvailable) {
                 availableGirls[availableGirlsCounter++] = GIRL.values()[i];
             }
-        }
-        availableGirls = Arrays.copyOfRange(availableGirls, 0, availableGirlsCounter);
-
-        int availableGuysCounter = 0;
-        for (int i = 0; i < GUY.values().length; i++) {
-            boolean available = true;
-            for (Pair<GUY,GIRL> pair : confirmed) {
-                if (pair.fst == GUY.values()[i]) {
-                    available = false;
-                }
-            }
-            if (available) {
+            if (guyAvailable) {
                 availableGuys[availableGuysCounter++] = GUY.values()[i];
             }
         }
+        availableGirls = Arrays.copyOfRange(availableGirls, 0, availableGirlsCounter);
         availableGuys = Arrays.copyOfRange(availableGuys, 0, availableGuysCounter);
 
         for (int i = 0; i < availableGirls.length; i++) {
             treemap.put(i, availableGirls[i]);
         }
 
-        recursePairs();
+        recurseCouples();
 
-        System.out.println("Number of winning combinations: " + winningPairs.size());
-        if (winningPairs.size() < 20 && winningPairs.size() > 0) {
-            for (List<Pair> pairList : winningPairs) {
+        System.out.println("Number of winning combinations: " + winningCouples.size());
+        if (winningCouples.size() < 20 && winningCouples.size() > 0) {
+            for (List<Couple> coupleList : winningCouples) {
                 System.out.print("Winning combination: ");
-                for (Pair pair : pairList) {
-                    System.out.print(pair.fst + " & " + pair.snd + ", ");
+                StringBuilder couplesString = new StringBuilder();
+                for (Couple couple : coupleList) {
+                    if (couplesString.length() != 0) {
+                        couplesString.append(", ");
+                    }
+                    couplesString.append(couple.getGuy()).append(" & ").append(couple.getGirl());
                 }
-                System.out.println();
+                System.out.println(couplesString.toString());
             }
         }
 
     }
 
-    private static void recursePairs() {
+    private static void recurseCouples() {
         for (int i = 0; i < treemap.size(); i++) {
             int index = (Integer)treemap.keySet().toArray()[i];
             GIRL girl = treemap.remove(index);
             girls.add(girl);
 
             if (treemap.isEmpty()) {
-                List<Pair> current = new ArrayList<Pair>();
+                List<Couple> current = new ArrayList<Couple>();
                 for (int j = 0; j < girls.size(); j++) {
-                    Pair pair = new Pair<GUY, GIRL>(availableGuys[j], girls.get(j));
-                    if (disconfirmed.contains(pair)) {
+                    Couple couple = new Couple(availableGuys[j], girls.get(j));
+                    if (disproven.contains(couple)) {
                         break;
                     } else {
-                        current.add(pair);
+                        current.add(couple);
                     }
                 }
                 if (current.size() == girls.size()) {
 
-                    current.addAll(confirmed);
+                    current.addAll(proven);
 
-                    if (current.containsAll(confirmed) && Collections.disjoint(disconfirmed, current)) {
+                    if (current.containsAll(proven) && Collections.disjoint(disproven, current)) {
                         boolean match = true;
                         for (Episode episode : episodes) {
-                            List<Pair> intersect = new ArrayList<Pair>(current);
-                            intersect.retainAll(episode.getPairs());
+                            List<Couple> intersect = new ArrayList<Couple>(current);
+                            intersect.retainAll(episode.getCouples());
                             if (intersect.size() != episode.getNumBeams()) {
                                 match = false;
                                 break;
@@ -110,23 +138,15 @@ public class Main {
                         }
 
                         if (match) {
-                            winningPairs.add(current);
+                            winningCouples.add(current);
                         }
                     }
                 }
             } else {
-                recursePairs();
+                recurseCouples();
             }
             girls.remove(girl);
             treemap.put(index, girl);
         }
-    }
-
-    enum GUY {
-        ANDRE, DERRICK, EDWARD, HAYDEN, JAYLAN, JOEY, MICHAEL, MIKE, OSVALDO, OZZY, TYLER
-    }
-
-    enum GIRL {
-        ALICIA, CAROLINA, CASANDRA, GIANNA, HANNAH, KAM, KARI, KATHRYN, SHANNON, TAYLOR, TYRANNY
     }
 }

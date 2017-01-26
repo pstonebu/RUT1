@@ -1,12 +1,10 @@
-import com.sun.tools.javac.util.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 
 class Episode {
 
     private int numBeams;
-    private List<Pair> pairs = new ArrayList<Pair>();
+    private List<Couple> couples = new ArrayList<Couple>();
 
     Episode() {
     }
@@ -19,11 +17,11 @@ class Episode {
         this.numBeams = numBeams;
     }
 
-    List<Pair> getPairs() {
-        return pairs;
+    List<Couple> getCouples() {
+        return couples;
     }
 
-    void addPair(Main.GUY guy, Main.GIRL girl) {
-        pairs.add(new Pair<Main.GUY, Main.GIRL>(guy, girl));
+    void addCouple(GUY guy, GIRL girl) {
+        couples.add(new Couple(guy, girl));
     }
 }
