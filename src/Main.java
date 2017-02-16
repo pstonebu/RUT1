@@ -81,10 +81,25 @@ public class Main {
         episodeFive.addCouple(GUY.TYLER, GIRL.SHANNON);
         episodeFive.setNumBeams(4);
 
+        Episode episodeSix = new Episode();
+        episodeSix.addCouple(GUY.ANDRE, GIRL.TAYLOR);
+        episodeSix.addCouple(GUY.DERRICK, GIRL.TYRANNY);
+        episodeSix.addCouple(GUY.EDWARD, GIRL.KAM);
+        episodeSix.addCouple(GUY.HAYDEN, GIRL.CAROLINA);
+        episodeSix.addCouple(GUY.JAYLAN, GIRL.HANNAH);
+        episodeSix.addCouple(GUY.JOEY, GIRL.KATHRYN);
+        episodeSix.addCouple(GUY.MICHAEL, GIRL.KARI);
+        episodeSix.addCouple(GUY.MIKE, GIRL.ALICIA);
+        episodeSix.addCouple(GUY.OSVALDO, GIRL.GIANNA);
+        episodeSix.addCouple(GUY.OZZY, GIRL.CASANDRA);
+        episodeSix.addCouple(GUY.TYLER, GIRL.SHANNON);
+        episodeSix.setNumBeams(4);
+
         disproven.add(new Couple(GUY.HAYDEN, GIRL.GIANNA));
         disproven.add(new Couple(GUY.ANDRE, GIRL.ALICIA));
         disproven.add(new Couple(GUY.OZZY, GIRL.CAROLINA));
         disproven.add(new Couple(GUY.OSVALDO, GIRL.TYRANNY));
+        disproven.add(new Couple(GUY.OZZY, GIRL.HANNAH));
 
         proven.add(new Couple(GUY.EDWARD, GIRL.KAM));
 
@@ -93,6 +108,7 @@ public class Main {
         episodes.add(episodeThree);
         episodes.add(episodeFour);
         episodes.add(episodeFive);
+        episodes.add(episodeSix);
 
         int availableGirlsCounter = 0, availableGuysCounter = 0;
         for (int i = 0; i < GIRL.values().length; i++) {
