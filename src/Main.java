@@ -95,13 +95,27 @@ public class Main {
         episodeSix.addCouple(GUY.TYLER, GIRL.SHANNON);
         episodeSix.setNumBeams(4);
 
+        Episode episodeSeven = new Episode();
+        episodeSeven.addCouple(GUY.ANDRE, GIRL.CASANDRA);
+        episodeSeven.addCouple(GUY.DERRICK, GIRL.KARI);
+        episodeSeven.addCouple(GUY.EDWARD, GIRL.KAM);
+        episodeSeven.addCouple(GUY.HAYDEN, GIRL.CAROLINA);
+        episodeSeven.addCouple(GUY.JAYLAN, GIRL.TYRANNY);
+        episodeSeven.addCouple(GUY.JOEY, GIRL.KATHRYN);
+        episodeSeven.addCouple(GUY.MICHAEL, GIRL.HANNAH);
+        episodeSeven.addCouple(GUY.MIKE, GIRL.GIANNA);
+        episodeSeven.addCouple(GUY.OSVALDO, GIRL.TAYLOR);
+        episodeSeven.addCouple(GUY.OZZY, GIRL.ALICIA);
+        episodeSeven.addCouple(GUY.TYLER, GIRL.SHANNON);
+        episodeSeven.setNumBeams(4);
+
         disproven.add(new Couple(GUY.HAYDEN, GIRL.GIANNA));
         disproven.add(new Couple(GUY.ANDRE, GIRL.ALICIA));
         disproven.add(new Couple(GUY.OZZY, GIRL.CAROLINA));
         disproven.add(new Couple(GUY.OSVALDO, GIRL.TYRANNY));
-        disproven.add(new Couple(GUY.OZZY, GIRL.HANNAH));
-
         proven.add(new Couple(GUY.EDWARD, GIRL.KAM));
+        disproven.add(new Couple(GUY.OZZY, GIRL.HANNAH));
+        disproven.add(new Couple(GUY.ANDRE, GIRL.TAYLOR));
 
         episodes.add(episodeOne);
         episodes.add(episodeTwo);
@@ -109,6 +123,7 @@ public class Main {
         episodes.add(episodeFour);
         episodes.add(episodeFive);
         episodes.add(episodeSix);
+        episodes.add(episodeSeven);
 
         int availableGirlsCounter = 0, availableGuysCounter = 0;
         for (int i = 0; i < GIRL.values().length; i++) {
