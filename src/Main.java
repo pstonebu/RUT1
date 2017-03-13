@@ -109,6 +109,34 @@ public class Main {
         episodeSeven.addCouple(GUY.TYLER, GIRL.SHANNON);
         episodeSeven.setNumBeams(4);
 
+        Episode episodeEight = new Episode();
+        episodeEight.addCouple(GUY.ANDRE, GIRL.GIANNA);
+        episodeEight.addCouple(GUY.DERRICK, GIRL.SHANNON);
+        episodeEight.addCouple(GUY.EDWARD, GIRL.KAM);
+        episodeEight.addCouple(GUY.HAYDEN, GIRL.CAROLINA);
+        episodeEight.addCouple(GUY.JAYLAN, GIRL.TYRANNY);
+        episodeEight.addCouple(GUY.JOEY, GIRL.CASANDRA);
+        episodeEight.addCouple(GUY.MICHAEL, GIRL.KATHRYN);
+        episodeEight.addCouple(GUY.MIKE, GIRL.KARI);
+        episodeEight.addCouple(GUY.OSVALDO, GIRL.TAYLOR);
+        episodeEight.addCouple(GUY.OZZY, GIRL.ALICIA);
+        episodeEight.addCouple(GUY.TYLER, GIRL.HANNAH);
+        episodeEight.setNumBeams(5);
+
+        Episode episodeNine = new Episode();
+        episodeNine.addCouple(GUY.ANDRE, GIRL.KATHRYN);
+        episodeNine.addCouple(GUY.DERRICK, GIRL.CASANDRA);
+        episodeNine.addCouple(GUY.EDWARD, GIRL.KAM);
+        episodeNine.addCouple(GUY.HAYDEN, GIRL.CAROLINA);
+        episodeNine.addCouple(GUY.JAYLAN, GIRL.TYRANNY);
+        episodeNine.addCouple(GUY.JOEY, GIRL.HANNAH);
+        episodeNine.addCouple(GUY.MICHAEL, GIRL.KARI);
+        episodeNine.addCouple(GUY.MIKE, GIRL.ALICIA);
+        episodeNine.addCouple(GUY.OSVALDO, GIRL.TAYLOR);
+        episodeNine.addCouple(GUY.OZZY, GIRL.GIANNA);
+        episodeNine.addCouple(GUY.TYLER, GIRL.SHANNON);
+        episodeNine.setNumBeams(9);
+
         disproven.add(new Couple(GUY.HAYDEN, GIRL.GIANNA));
         disproven.add(new Couple(GUY.ANDRE, GIRL.ALICIA));
         disproven.add(new Couple(GUY.OZZY, GIRL.CAROLINA));
@@ -116,6 +144,7 @@ public class Main {
         proven.add(new Couple(GUY.EDWARD, GIRL.KAM));
         disproven.add(new Couple(GUY.OZZY, GIRL.HANNAH));
         disproven.add(new Couple(GUY.ANDRE, GIRL.TAYLOR));
+        proven.add(new Couple(GUY.HAYDEN, GIRL.CAROLINA));
 
         episodes.add(episodeOne);
         episodes.add(episodeTwo);
@@ -124,6 +153,8 @@ public class Main {
         episodes.add(episodeFive);
         episodes.add(episodeSix);
         episodes.add(episodeSeven);
+        episodes.add(episodeEight);
+        episodes.add(episodeNine);
 
         int availableGirlsCounter = 0, availableGuysCounter = 0;
         for (int i = 0; i < GIRL.values().length; i++) {
