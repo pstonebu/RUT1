@@ -1,3 +1,5 @@
+package com.stoneburner.rut1;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ class Episode {
         this.numBeams = numBeams;
     }
 
-    List<Couple> getCouples() {
+    List<com.stoneburner.rut1.Couple> getCouples() {
         return couples;
     }
 

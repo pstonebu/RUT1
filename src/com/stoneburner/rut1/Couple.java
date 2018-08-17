@@ -1,3 +1,5 @@
+package com.stoneburner.rut1;
+
 public class Couple {
     private GUY guy;
     private GIRL girl;
