@@ -31,7 +31,25 @@ public class Main {
         episodeOne.addCouple(ZAK, BRIA);
         episodeOne.setNumBeams(3);
 
+        Episode episodeTwo = new Episode();
+        episodeTwo.addCouple(ANDREW, MORGAN);
+        episodeTwo.addCouple(BRETT, ASIA);
+        episodeTwo.addCouple(CAM, KAYLA);
+        episodeTwo.addCouple(DANIEL, NUTSA);
+        episodeTwo.addCouple(KWASI, LAUREN);
+        episodeTwo.addCouple(LEWIS, JASMINE);
+        episodeTwo.addCouple(MOE, BRIA);
+        episodeTwo.addCouple(SHAMOY, MARIA);
+        episodeTwo.addCouple(TEVIN, KENYA);
+        episodeTwo.addCouple(TOMAS, CALI);
+        episodeTwo.addCouple(ZAK, SAMANTHA);
+        episodeTwo.setNumBeams(3);
+
         episodes.add(episodeOne);
+        episodes.add(episodeTwo);
+
+        disproven.add(new Couple(TOMAS, MARIA));
+        disproven.add(new Couple(ANDREW, ASIA));
 
         int availableGirlsCounter = 0, availableGuysCounter = 0;
         for (int i = 0; i < GIRL.values().length; i++) {
