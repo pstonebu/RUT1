@@ -1,28 +1,19 @@
 package com.stoneburner.rut1;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class Couple {
-    private GUY guy;
-    private GIRL girl;
+    private Person one;
+    private Person two;
 
-    public Couple(GUY guy, GIRL girl) {
-        this.guy = guy;
-        this.girl = girl;
-    }
-
-    public GUY getGuy() {
-        return guy;
-    }
-
-    public void setGuy(GUY guy) {
-        this.guy = guy;
-    }
-
-    public GIRL getGirl() {
-        return girl;
-    }
-
-    public void setGirl(GIRL girl) {
-        this.girl = girl;
+    public Couple(Person one, Person two) throws SamePersonException {
+        if (one.equals(two)) {
+            throw new SamePersonException();
+        }
+        this.one = one;
+        this.two = two;
     }
 
     @Override
@@ -32,16 +23,18 @@ public class Couple {
 
         Couple couple = (Couple) o;
 
-        if (guy != couple.guy) return false;
-        if (girl != couple.girl) return false;
-
-        return true;
+        return (one == couple.one && two == couple.two) || (one == couple.two && two == couple.one);
     }
 
     @Override
     public int hashCode() {
-        int result = guy != null ? guy.hashCode() : 0;
-        result = 31 * result + (girl != null ? girl.hashCode() : 0);
+        int result = one != null ? one.hashCode() : 0;
+        result = 31 * result + (two != null ? two.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return one + " & " + two;
     }
 }
