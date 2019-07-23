@@ -1,5 +1,6 @@
 package com.stoneburner.rut1;
 
+import com.google.common.base.Objects;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,28 +10,29 @@ public class Couple {
     private Person two;
 
     public Couple(Person one, Person two) throws SamePersonException {
+        //not the same person twice, and then persist ordinal order
         if (one.equals(two)) {
             throw new SamePersonException();
+        } else if (one.ordinal() < two.ordinal()) {
+            this.one = one;
+            this.two = two;
+        } else {
+            this.one = two;
+            this.two = one;
         }
-        this.one = one;
-        this.two = two;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Couple couple = (Couple) o;
-
-        return (one == couple.one && two == couple.two) || (one == couple.two && two == couple.one);
+        return one == couple.one && two == couple.two;
     }
 
     @Override
     public int hashCode() {
-        int result = one != null ? one.hashCode() : 0;
-        result = 31 * result + (two != null ? two.hashCode() : 0);
-        return result;
+        return Objects.hashCode(one, two);
     }
 
     @Override
