@@ -16,7 +16,7 @@ import static com.sun.deploy.util.StringUtils.join;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.Collections.disjoint;
-import static java.util.concurrent.TimeUnit.SECONDS;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.IntStream.range;
@@ -114,7 +114,7 @@ public class Main {
         Stopwatch stopwatch = createStarted();
         recurseCouples(availablePeople, newArrayList(perfectMatches));
         stopwatch.stop();
-        System.out.println("Time to recurse: " + stopwatch.elapsed(SECONDS) + " seconds.");
+        System.out.println("Time to recurse: " + stopwatch.elapsed(MILLISECONDS)/1000.0 + " seconds.");
         System.out.println("Number of winning combinations: " + winningCouples.size());
         if (winningCouples.size() < 20) {
             for (Set<Couple> couples : winningCouples) {
