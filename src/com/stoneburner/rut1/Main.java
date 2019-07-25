@@ -1,11 +1,13 @@
 package com.stoneburner.rut1;
 
+import com.google.common.base.Stopwatch;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Set;
 
+import static com.google.common.base.Stopwatch.createStarted;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.google.common.collect.Sets.newLinkedHashSet;
@@ -14,6 +16,7 @@ import static com.sun.deploy.util.StringUtils.join;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.Collections.disjoint;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.IntStream.range;
@@ -79,17 +82,30 @@ public class Main {
         four.addCouple(JUSTIN, MAX);
         four.addCouple(KAI, KARI);
         four.setNumBeams(1);
+        
+        Episode five = new Episode();
+        five.addCouple(AASHA, KAI);
+        five.addCouple(AMBER, NOUR);
+        five.addCouple(BASIT, REMY);
+        five.addCouple(BRANDON, MAX);
+        five.addCouple(DANNY, KARI);
+        five.addCouple(JASMINE, PAIGE);
+        five.addCouple(JENNA, KYLIE);
+        five.addCouple(JONATHAN, JUSTIN);
+        five.setNumBeams(0);
 
         episodes.add(one);
         episodes.add(two);
         episodes.add(three);
         episodes.add(four);
+        episodes.add(five);
 
         //No match truth booths
         noMatches.add(new Couple(JUSTIN, NOUR));
         noMatches.add(new Couple(BRANDON, REMY));
         noMatches.add(new Couple(JENNA, KAI));
         noMatches.add(new Couple(JENNA, DANNY));
+        noMatches.add(new Couple(KYLIE, KARI));
 
         //Perfect match truth booths
 
@@ -98,8 +114,10 @@ public class Main {
                 .filter(p -> perfectMatches.stream()
                         .noneMatch(c -> c.getOne() != p || c.getTwo() != p))
                 .collect(toSet());
-
+        Stopwatch stopwatch = createStarted();
         recurseCouples(availablePeople, newArrayList(perfectMatches));
+        stopwatch.stop();
+        System.out.println("Time to recurse: " + stopwatch.elapsed(SECONDS) + " seconds.");
         System.out.println("Number of winning combinations: " + winningCouples.size());
         if (winningCouples.size() < 20) {
             for (Set<Couple> couples : winningCouples) {
@@ -167,9 +185,11 @@ public class Main {
             nextSet.remove(second);
 
             Couple couple = new Couple(first, second);
-            currentResults.add(couple);
-            recurseCouples(nextSet, currentResults);
-            currentResults.remove(couple);
+            if (!noMatches.contains(couple)) {
+                currentResults.add(couple);
+                recurseCouples(nextSet, currentResults);
+                currentResults.remove(couple);
+            }
         }
     }
 }
