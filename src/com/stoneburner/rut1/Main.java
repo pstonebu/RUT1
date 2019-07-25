@@ -82,23 +82,11 @@ public class Main {
         four.addCouple(JUSTIN, MAX);
         four.addCouple(KAI, KARI);
         four.setNumBeams(1);
-        
-        Episode five = new Episode();
-        five.addCouple(AASHA, KAI);
-        five.addCouple(AMBER, NOUR);
-        five.addCouple(BASIT, REMY);
-        five.addCouple(BRANDON, MAX);
-        five.addCouple(DANNY, KARI);
-        five.addCouple(JASMINE, PAIGE);
-        five.addCouple(JENNA, KYLIE);
-        five.addCouple(JONATHAN, JUSTIN);
-        five.setNumBeams(0);
 
         episodes.add(one);
         episodes.add(two);
         episodes.add(three);
         episodes.add(four);
-        episodes.add(five);
 
         //No match truth booths
         noMatches.add(new Couple(JUSTIN, NOUR));
@@ -106,6 +94,15 @@ public class Main {
         noMatches.add(new Couple(JENNA, KAI));
         noMatches.add(new Couple(JENNA, DANNY));
         noMatches.add(new Couple(KYLIE, KARI));
+        //adding the blackout from episode five here to speed things up
+        noMatches.add(new Couple(AASHA, KAI));
+        noMatches.add(new Couple(AMBER, NOUR));
+        noMatches.add(new Couple(BASIT, REMY));
+        noMatches.add(new Couple(BRANDON, MAX));
+        noMatches.add(new Couple(DANNY, KARI));
+        noMatches.add(new Couple(JASMINE, PAIGE));
+        noMatches.add(new Couple(JENNA, KYLIE));
+        noMatches.add(new Couple(JONATHAN, JUSTIN));
 
         //Perfect match truth booths
 
