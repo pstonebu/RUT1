@@ -83,6 +83,17 @@ public class Main {
         four.addCouple(KAI, KARI);
         four.setNumBeams(1);
 
+        Episode six = new Episode();
+        six.addCouple(AASHA, BRANDON);
+        six.addCouple(AMBER, JENNA);
+        six.addCouple(BASIT,JONATHAN);
+        six.addCouple(DANNY, KAI);
+        six.addCouple(JASMINE, KYLIE);
+        six.addCouple(JUSTIN, MAX);
+        six.addCouple(KARI, PAIGE);
+        six.addCouple(NOUR, REMY);
+        six.setNumBeams(3);
+
         episodes.add(one);
         episodes.add(two);
         episodes.add(three);
@@ -105,12 +116,14 @@ public class Main {
         noMatches.add(new Couple(JONATHAN, JUSTIN));
 
         //Perfect match truth booths
+        perfectMatches.add(new Couple(AASHA, BRANDON));
 
-        // Add any people that aren't in a proven couple to available people
-        Set<Person> availablePeople = stream(values())
-                .filter(p -> perfectMatches.stream()
-                        .noneMatch(c -> c.getOne() != p || c.getTwo() != p))
-                .collect(toSet());
+        // Remove any people in a proven couple from available people
+        Set<Person> availablePeople = newHashSet(asList(values()));
+        perfectMatches.parallelStream().forEach(c -> {
+            availablePeople.remove(c.getOne());
+            availablePeople.remove(c.getTwo());
+        });
         Stopwatch stopwatch = createStarted();
         recurseCouples(availablePeople, newArrayList(perfectMatches));
         stopwatch.stop();
@@ -118,11 +131,10 @@ public class Main {
         System.out.println("Number of winning combinations: " + winningCouples.size());
         if (winningCouples.size() < 20) {
             for (Set<Couple> couples : winningCouples) {
-                System.out.println("Winning combination: " + join(couples, ", "));
+                System.out.println("Winning combination: " + couples);
             }
         }
-
-
+        
         System.out.println("\nMatchup math matrix: ");
         //math in strings
         String[][] mathOutput = new String[values().length+1][values().length+1];
