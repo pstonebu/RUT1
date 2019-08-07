@@ -12,18 +12,16 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.google.common.collect.Sets.newLinkedHashSet;
 import static com.stoneburner.rut1.Person.*;
-import static com.sun.deploy.util.StringUtils.join;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.Collections.disjoint;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 import static java.util.stream.IntStream.range;
 
 @SpringBootApplication
 public class Main {
-    private static Set<Episode> episodes = newHashSet();
+    private static Set<Ceremony> ceremonies = newHashSet();
     private static Set<Couple> perfectMatches = newHashSet();
     private static Set<Couple> noMatches = newHashSet();
     private static List<Set<Couple>> winningCouples = newArrayList();
@@ -39,7 +37,7 @@ public class Main {
                 })
                 .collect(toList());
 
-        Episode one = new Episode();
+        Ceremony one = new Ceremony();
         one.addCouple(AASHA, PAIGE);
         one.addCouple(AMBER, NOUR);
         one.addCouple(BASIT, JONATHAN);
@@ -50,7 +48,7 @@ public class Main {
         one.addCouple(KARI, KYLIE);
         one.setNumBeams(2);
 
-        Episode two = new Episode();
+        Ceremony two = new Ceremony();
         two.addCouple(AASHA, BRANDON);
         two.addCouple(AMBER, NOUR);
         two.addCouple(BASIT, JONATHAN);
@@ -61,7 +59,7 @@ public class Main {
         two.addCouple(MAX, PAIGE);
         two.setNumBeams(2);
 
-        Episode three = new Episode();
+        Ceremony three = new Ceremony();
         three.addCouple(AASHA, MAX);
         three.addCouple(AMBER, PAIGE);
         three.addCouple(BASIT, REMY);
@@ -72,7 +70,7 @@ public class Main {
         three.addCouple(KARI, KYLIE);
         three.setNumBeams(2);
 
-        Episode four = new Episode();
+        Ceremony four = new Ceremony();
         four.addCouple(AASHA, REMY);
         four.addCouple(AMBER, NOUR);
         four.addCouple(BASIT, DANNY);
@@ -83,7 +81,7 @@ public class Main {
         four.addCouple(KAI, KARI);
         four.setNumBeams(1);
 
-        Episode six = new Episode();
+        Ceremony six = new Ceremony();
         six.addCouple(AASHA, BRANDON);
         six.addCouple(AMBER, JENNA);
         six.addCouple(BASIT,JONATHAN);
@@ -94,10 +92,10 @@ public class Main {
         six.addCouple(NOUR, REMY);
         six.setNumBeams(3);
 
-        episodes.add(one);
-        episodes.add(two);
-        episodes.add(three);
-        episodes.add(four);
+        ceremonies.add(one);
+        ceremonies.add(two);
+        ceremonies.add(three);
+        ceremonies.add(four);
 
         //No match truth booths
         noMatches.add(new Couple(JUSTIN, NOUR));
@@ -105,7 +103,7 @@ public class Main {
         noMatches.add(new Couple(JENNA, KAI));
         noMatches.add(new Couple(JENNA, DANNY));
         noMatches.add(new Couple(KYLIE, KARI));
-        //adding the blackout from episode five here to speed things up
+        //adding the blackout from ceremony five here to speed things up
         noMatches.add(new Couple(AASHA, KAI));
         noMatches.add(new Couple(AMBER, NOUR));
         noMatches.add(new Couple(BASIT, REMY));
@@ -162,10 +160,10 @@ public class Main {
         if (availablePeople.size() < 2) {
             if (disjoint(noMatches, currentResults)) {
                 boolean match = true;
-                for (Episode episode : episodes) {
+                for (Ceremony ceremony : ceremonies) {
                     Set<Couple> intersect = newHashSet(currentResults);
-                    intersect.retainAll(episode.getCouples());
-                    if (intersect.size() != episode.getNumBeams()) {
+                    intersect.retainAll(ceremony.getCouples());
+                    if (intersect.size() != ceremony.getNumBeams()) {
                         match = false;
                         break;
                     }
