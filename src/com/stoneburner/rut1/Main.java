@@ -92,10 +92,23 @@ public class Main {
         six.addCouple(NOUR, REMY);
         six.setNumBeams(3);
 
+        Ceremony seven = new Ceremony();
+        seven.addCouple(AASHA, BRANDON);
+        seven.addCouple(AMBER, DANNY);
+        seven.addCouple(BASIT,JONATHAN);
+        seven.addCouple(JASMINE, KAI);
+        seven.addCouple(JENNA, PAIGE);
+        seven.addCouple(JUSTIN, MAX);
+        seven.addCouple(KARI, REMY);
+        seven.addCouple(KYLIE, NOUR);
+        seven.setNumBeams(3);
+
         ceremonies.add(one);
         ceremonies.add(two);
         ceremonies.add(three);
         ceremonies.add(four);
+        ceremonies.add(six);
+        ceremonies.add(seven);
 
         //No match truth booths
         noMatches.add(new Couple(JUSTIN, NOUR));

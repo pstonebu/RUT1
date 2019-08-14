@@ -9,7 +9,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 @Getter @Setter @NoArgsConstructor
-class Episode {
+class Ceremony {
     private int numBeams;
     private List<Couple> couples = newArrayList();
 
