@@ -46,6 +46,7 @@ public class Main {
         Ceremony seven = new Ceremony(3, AASHA, BRANDON, AMBER, DANNY, BASIT, JONATHAN, JASMINE, KAI, JENNA, PAIGE, JUSTIN, MAX, KARI, REMY, KYLIE, NOUR);
         Ceremony eight = new Ceremony(3, AASHA, BRANDON, AMBER, PAIGE, BASIT, JONATHAN, DANNY, KYLIE, JASMINE, NOUR, JENNA, KARI, JUSTIN, MAX, KAI, REMY);
         Ceremony nine = new Ceremony(6, AASHA, BRANDON, AMBER, KYLIE, BASIT, JONATHAN, DANNY, KAI, JASMINE, NOUR, JENNA, PAIGE, JUSTIN, REMY, KARI, MAX);
+        Ceremony ten = new Ceremony(8, AASHA, BRANDON, AMBER, REMY, BASIT, JONATHAN, DANNY, KAI, JASMINE, NOUR, JENNA, PAIGE, JUSTIN, KYLIE, KARI, MAX);
 
         ceremonies.add(one);
         ceremonies.add(two);
@@ -56,6 +57,7 @@ public class Main {
         ceremonies.add(seven);
         ceremonies.add(eight);
         ceremonies.add(nine);
+        ceremonies.add(ten);
 
         //No match truth booths
         noMatches.add(new Couple(JUSTIN, NOUR));
@@ -66,6 +68,7 @@ public class Main {
         noMatches.add(new Couple(JENNA, JASMINE));
         noMatches.add(new Couple(PAIGE, REMY));
         noMatches.add(new Couple(AMBER, MAX));
+        noMatches.add(new Couple(AMBER, KYLIE));
 
         //Perfect match truth booths
         perfectMatches.add(new Couple(AASHA, BRANDON));
